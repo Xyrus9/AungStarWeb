@@ -1,33 +1,36 @@
-import { useState } from "react";
-import { Link } from 'react-router-dom';
-import ContactUs from "./ContactUs";
+import { Link } from "react-router-dom";
 
-function Jewelry({password}){
-const [showText,setShowText] = useState(false);
-
-const showTextClick = (element) => {
-    element.showMore=!element.showMore 
-    setShowText(!showText)
-     }
-
-    return( <div className="products">
-    {password.map((element=>{
-        const { id, name, price, image,  description, showMore }= element;
-        return(<div className="productCard" key={ id }>  
-        
-            <img className="bigger" src={ image } alt="foto" width="380px" height="380px"/>
-            <h3>{ name }</h3>           
-            <h4> € { price }</h4>
-            <p> { showMore ? description : description.substring(0, 40)} </p>
-            <button className="seeMore" onClick={ ()=> showTextClick(element)}>{ showMore ? "Ver menos" : "Ver más"}</button>
-            <Link to="/contactus">
-                <button className="ctaBtn"> Pedir cita </button>
-            </Link>
-
-        </div>)
-    }
-    ))}
-   </div>)  
+function Jewelry({ items, onToggle }) {
+    return (
+        <div className="products">
+            {items.map((element) => {
+                const { id, name, price, image, description, showMore, category, maker } = element;
+                const preview = description.substring(0, 90);
+                return (
+                    <div className="productCard" key={id}>
+                        <img className="productImage" src={image} alt={name} width="360" height="360" />
+                        <div className="productMeta">
+                            <p className="pill">{category}</p>
+                            <h3>{name}</h3>
+                            <h4>MMK {price.toLocaleString()}</h4>
+                        </div>
+                        <p className="description">{showMore ? description : `${preview}...`}</p>
+                        {showMore && (
+                            <p className="maker">Created by: {maker}</p>
+                        )}
+                        <div className="cardActions">
+                            <Link to={`/product/${id}`} className="view-details-link">
+                                <button className="seeMore">View details</button>
+                            </Link>
+                            <Link to="/contactus" className="ctaLink">
+                                <button className="ctaBtn">Call to reserve</button>
+                            </Link>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    );
 }
 
 export default Jewelry;

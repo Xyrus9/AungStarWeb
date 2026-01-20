@@ -265,3 +265,24 @@
   background-color: #191e34;
   color: #fff;
 }
+
+/* Theme harmonization */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.sec-title h2,
+.list-style-one li {
+  color: var(--text);
+}
+
+.sec-title .text,
+.about-section .text {
+  color: var(--muted);
+}
+
+.list-style-one li:before,
+.sec-title .title {
+  color: var(--accent);
+}

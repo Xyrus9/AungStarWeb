@@ -1,17 +1,24 @@
-import { useState } from "react";
-import { data } from "./data";
+import { getMetadata } from "./services/productService";
 
-function Buttons({ filteredJewelry }){
-    const [products, setProducts] = useState(data);
-    
-    return(
-        <div className="cont">
-        
-            <button className="change" onClick={ ()=> filteredJewelry("anillo") }>Anillos </button>
-            <button className="change" onClick={ ()=> filteredJewelry("pendientes") }>Pendientes </button>
-            <button className="change" onClick={ ()=> filteredJewelry("pulsera") }>Pulseras</button>
+const { categories } = getMetadata();
+
+function Buttons({ activeCategory, onFilter }) {
+    return (
+        <div className="category-filter-wrapper">
+            <p className="filter-label">Category / အမျိုးအစား</p>
+            <div className="filterBar">
+                {categories.map((category) => (
+                    <button
+                        key={category.key}
+                        className={`filterBtn ${activeCategory === category.key ? 'active' : ''}`}
+                        onClick={() => onFilter(category.key)}
+                    >
+                        {category.labelEn} / {category.labelMm}
+                    </button>
+                ))}
+            </div>
         </div>
-    )
+    );
 }
 
 export default Buttons;

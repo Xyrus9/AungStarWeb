@@ -144,3 +144,70 @@ fieldset {
 h3, h4{
     text-align: center;
 }
+
+.contact-details {
+  background: #ffffff;
+  padding: 20px;
+  border: 1px solid #e9dfca;
+  border-radius: 12px;
+  margin: 40px auto 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+.contact-details p {
+  margin: 6px 0;
+  color: #433b2d;
+  text-align: left;
+}
+
+.contact-details .note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #6f624e;
+}
+
+/* Theme harmonization */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+#contact {
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 0 20px 0 var(--shadow), 0 5px 5px 0 var(--shadow);
+}
+
+#contact input[type="text"],
+#contact input[type="email"],
+#contact input[type="tel"],
+#contact input[type="url"],
+#contact textarea {
+  background: var(--page-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+#contact button[type="submit"] {
+  background: linear-gradient(135deg, var(--nav-bg), #1f1b14);
+  color: var(--nav-text);
+}
+
+#contact button[type="submit"]:hover {
+  background: var(--nav-bg);
+  color: var(--nav-text);
+}
+
+.contact-details {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.contact-details p {
+  color: var(--text);
+}
+
+.contact-details .note {
+  color: var(--muted);
+}
