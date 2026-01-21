@@ -3,14 +3,12 @@ import { useProducts } from "./hooks/useProducts";
 import Buttons from "./Buttons";
 import AccessoryTypeFilter from "./AccessoryTypeFilter";
 import Jewelry from "./Jewelry";
+import { getGoldPrice } from "./services/goldPriceService";
 
-const goldRates = [
-  { label: "Yangon 24K (1 tical)", price: "MMK 3,456,000", note: "Update daily" },
-  { label: "Mandalay 24K (1 tical)", price: "MMK 3,448,000", note: "Update daily" },
-  { label: "21K Retail", price: "MMK 2,890,000", note: "Sample rate" },
-];
+const formatPrice = (value) => `${value.toLocaleString("en-US")} ကျပ် / MMK`;
 
 function Home() {
+  const goldPrice = getGoldPrice();
   const { products, loading, error, toggleShowMore } = useProducts();
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedAccessoriesType, setSelectedAccessoriesType] = useState("all");
@@ -58,17 +56,21 @@ function Home() {
       <section className="gold-rates">
         <div className="section-header">
           <div>
-            <p className="eyebrow">Daily Price Board</p>
-            <h2>Myanmar gold prices</h2>
+            <p className="eyebrow">{goldPrice.titleMm} / {goldPrice.titleEn}</p>
+            <h2>{goldPrice.date}</h2>
           </div>
-          <p className="disclaimer">Sample numbers shown - replace with today's rates before publishing.</p>
+          <p className="disclaimer">Static prototype only — update manually for daily board.</p>
         </div>
-        <div className="price-grid">
-          {goldRates.map((rate) => (
-            <div className="price-card" key={rate.label}>
-              <p className="price-label">{rate.label}</p>
-              <p className="price-value">{rate.price}</p>
-              <p className="price-note">{rate.note}</p>
+        <div className="price-list">
+          {goldPrice.prices.map((rate) => (
+            <div className="price-card price-row" key={rate.goldType}>
+              <div className="price-left">
+                <p className="price-label">{rate.goldType}</p>
+                <p className="price-sub">{rate.labelEn}</p>
+              </div>
+              <div className="price-right">
+                <p className="price-value">{formatPrice(rate.price)}</p>
+              </div>
             </div>
           ))}
         </div>
