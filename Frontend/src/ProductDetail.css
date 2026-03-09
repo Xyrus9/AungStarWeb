@@ -1,0 +1,153 @@
+.detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 32px;
+}
+
+.back-btn {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 8px 12px;
+  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.back-btn:hover {
+  background: var(--surface-2);
+  color: var(--accent-strong);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.detail-image-wrapper {
+  position: sticky;
+  top: 24px;
+}
+
+.detail-image {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 32px var(--shadow);
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-pill {
+  margin-bottom: 4px;
+}
+
+.detail-title {
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: 38px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.detail-price {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent-strong);
+  margin: 0;
+}
+
+.detail-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 12px 0;
+}
+
+.detail-section {
+  margin: 12px 0;
+}
+
+.detail-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+.detail-description {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  margin: 0;
+}
+
+.detail-type {
+  font-size: 16px;
+  color: var(--text);
+  margin: 0;
+}
+
+.detail-maker {
+  font-size: 16px;
+  color: var(--text);
+  margin: 0;
+}
+
+.detail-actions {
+  margin-top: 20px;
+}
+
+.detail-cta-link {
+  text-decoration: none;
+  display: block;
+}
+
+.detail-cta-btn {
+  width: 100%;
+  border: none;
+  background: linear-gradient(135deg, #d6b25d, #f0d898);
+  color: #0f0d0a;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 18px var(--shadow);
+}
+
+.detail-cta-btn:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px var(--shadow);
+}
+
+.back-link {
+  color: var(--accent-strong);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
