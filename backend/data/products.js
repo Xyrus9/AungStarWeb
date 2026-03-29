@@ -1,22 +1,3 @@
-import an1 from './an1.webp';
-import an2 from './an2.png';
-import an4 from './an4.webp';
-import an5 from './an5.jpg';
-import an6 from './an6.png';
-import pen1 from './pen1.png';
-import pen2 from './pen2.webp';
-import pen3 from './pen3.png';
-import pen4 from './pen4.webp';
-import pen5 from './pen5.png';
-import pen6 from './pen6.png';
-import pen7 from './pen7.png';
-import pul1 from './pul1.png';
-import pul2 from './pul2.png';
-import pul3 from './pul3.png';
-import pul5 from './pul5.png';
-import pul6 from './pul6.jpg';
-import pul7 from './pul7.png';
-
 export const accessoryTypes = {
   ring: { labelEn: 'Ring', labelMm: 'လက်စွပ်' },
   earring: { labelEn: 'Earring', labelMm: 'နားဆွဲ' },
@@ -48,9 +29,8 @@ export const jewelryTypes = {
   'fashion': { labelEn: 'Fashion', labelMm: 'ဖေရျမ်း' },
 };
 
-export const data = [
+const products = [
   {
-    id: 1,
     name: '24K Lotus Bangle',
     category: 'gold',
     price: 3250000,
@@ -59,10 +39,9 @@ export const data = [
     goldType: '16_pae',
     showMore: false,
     description: '24K Myanmar gold bangle with hand-engraved lotus textures and a softly brushed finish.',
-    image: pul1,
+    image: './pul1.jpg',
   },
   {
-    id: 2,
     name: 'Yangon Heritage Ring',
     category: 'gold',
     price: 2850000,
@@ -71,10 +50,9 @@ export const data = [
     goldType: '14_pae',
     showMore: false,
     description: 'Solid 22K gold ring inspired by traditional Myanmar patterns, crafted for daily wear.',
-    image: an5,
+    image: './an5.jpg',
   },
   {
-    id: 3,
     name: 'GIA Diamond Studs',
     category: 'diamond',
     price: 4800000,
@@ -82,10 +60,9 @@ export const data = [
     accessoriesType: 'earstub',
     showMore: false,
     description: 'Pair of round brilliant diamonds in classic 18K gold four-prong settings with secure backs.',
-    image: pen4,
+    image: './pen4.jpg',
   },
   {
-    id: 4,
     name: 'Emerald Cut Halo Ring',
     category: 'diamond',
     price: 7200000,
@@ -93,10 +70,9 @@ export const data = [
     accessoriesType: 'ring',
     showMore: false,
     description: 'Emerald-cut center stone surrounded by a diamond halo on an 18K white gold band.',
-    image: an1,
+    image: './an1.jpg',
   },
   {
-    id: 5,
     name: 'Royal Peacock Necklace',
     category: 'jewelry',
     price: 5600000,
@@ -105,10 +81,9 @@ export const data = [
     jewelryType: 'gemstone',
     showMore: false,
     description: 'Statement necklace with layered gold links and a peacock-inspired pendant set with sapphire hues.',
-    image: pen2,
+    image: './pen2.jpg',
   },
   {
-    id: 6,
     name: 'Shwedagon Drop Earrings',
     category: 'jewelry',
     price: 2100000,
@@ -117,10 +92,9 @@ export const data = [
     jewelryType: 'fashion',
     showMore: false,
     description: '18K yellow gold drops echoing the Shwedagon silhouette, finished with mirror polishing.',
-    image: pen1,
+    image: './pen1.jpg',
   },
   {
-    id: 7,
     name: 'Diamond Cascade Bracelet',
     category: 'diamond',
     price: 6400000,
@@ -128,10 +102,9 @@ export const data = [
     accessoriesType: 'bracelet',
     showMore: false,
     description: 'Flexible bracelet with graduating diamonds on a slim 18K white gold line, secure clasp.',
-    image: pul3,
+    image: './pul3.jpg',
   },
   {
-    id: 8,
     name: 'Traditional Filigree Set',
     category: 'gold',
     price: 3950000,
@@ -140,10 +113,9 @@ export const data = [
     goldType: '14_pae',
     showMore: false,
     description: 'Lightweight filigree bangle and matching ring in 22K gold, handcrafted by Yangon artisans.',
-    image: pul5,
+    image: './pul5.jpg',
   },
   {
-    id: 9,
     name: 'Golden Teak Bracelet',
     category: 'gold',
     price: 2550000,
@@ -152,10 +124,9 @@ export const data = [
     goldType: '15_pae',
     showMore: false,
     description: 'Matte-finish 24K bracelet with teak-grain etching, designed for stacking or solo wear.',
-    image: pul7,
+    image: './pul7.jpg',
   },
   {
-    id: 10,
     name: 'Sakura Pearl Necklace',
     category: 'jewelry',
     price: 2750000,
@@ -164,10 +135,9 @@ export const data = [
     jewelryType: 'pearl',
     showMore: false,
     description: 'Freshwater pearls set on an 18K gold chain with sakura-inspired spacers for subtle shimmer.',
-    image: pen3,
+    image: './pen3.jpg',
   },
   {
-    id: 11,
     name: 'Midnight Sky Ring',
     category: 'diamond',
     price: 3150000,
@@ -175,10 +145,9 @@ export const data = [
     accessoriesType: 'ring',
     showMore: false,
     description: 'Round diamonds in a pavé band framing a deep sapphire center on 18K white gold.',
-    image: an2,
+    image: './an2.jpg',
   },
   {
-    id: 12,
     name: 'Sunbeam Rope Bracelet',
     category: 'gold',
     price: 1980000,
@@ -187,10 +156,9 @@ export const data = [
     goldType: '14_2_pyae',
     showMore: false,
     description: 'Classic rope bracelet in 22K gold with a sturdy clasp, ideal for gifts and daily wear.',
-    image: pul2,
+    image: './pul2.jpg',
   },
   {
-    id: 13,
     name: 'Lotus Diamond Pendant',
     category: 'diamond',
     price: 4300000,
@@ -198,10 +166,9 @@ export const data = [
     accessoriesType: 'pendant',
     showMore: false,
     description: 'Lotus-shaped pendant featuring a cluster of diamonds on an 18K white gold chain.',
-    image: pen5,
+    image: './pen5.jpg',
   },
   {
-    id: 14,
     name: 'Regal Bangle Stack',
     category: 'jewelry',
     price: 3600000,
@@ -210,10 +177,9 @@ export const data = [
     jewelryType: 'mixed_metal',
     showMore: false,
     description: 'Set of three mixed-finish bangles in 18K gold, combining satin, high polish, and hammered textures.',
-    image: pul6,
+    image: './pul6.jpg',
   },
   {
-    id: 15,
     name: 'Celestial Diamond Hoop',
     category: 'diamond',
     price: 3850000,
@@ -221,10 +187,9 @@ export const data = [
     accessoriesType: 'earhoop',
     showMore: false,
     description: 'Diamond hoops with alternating star and round settings on 18K white gold.',
-    image: pen6,
+    image: './pen6.jpg',
   },
   {
-    id: 16,
     name: 'Signature Infinity Ring',
     category: 'gold',
     price: 2150000,
@@ -233,10 +198,9 @@ export const data = [
     goldType: '13_pae',
     showMore: false,
     description: 'Infinity knot ring in 22K gold symbolizing prosperity and long-lasting partnerships.',
-    image: an6,
+    image: './an6.jpg',
   },
   {
-    id: 17,
     name: 'Heirloom Emerald Halo',
     category: 'jewelry',
     price: 4450000,
@@ -245,10 +209,9 @@ export const data = [
     jewelryType: 'gemstone',
     showMore: false,
     description: 'Emerald center embraced by a halo of diamonds set on an 18K yellow gold band.',
-    image: an4,
+    image: './an4.jpg',
   },
   {
-    id: 18,
     name: 'Radiant Solitaire',
     category: 'diamond',
     price: 5100000,
@@ -256,6 +219,8 @@ export const data = [
     accessoriesType: 'ring',
     showMore: false,
     description: 'Radiant-cut diamond solitaire on a slim 18K white gold shank for timeless elegance.',
-    image: pen7,
+    image: './pen7.jpg',
   },
 ];
+
+export default products;

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./Home";
-import About from "./About";
-import ContactUs from "./ContactUs";
-import ProductDetail from "./ProductDetail";
+import Home from "./Home.js";
+import About from "./About.js";
+import ContactUs from "./ContactUs.js";
+import ProductDetail from "./ProductDetail.js";
 import "./App.css";
 
 function App() {

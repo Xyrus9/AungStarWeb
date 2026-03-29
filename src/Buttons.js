@@ -1,4 +1,4 @@
-import { getMetadata } from "./services/productService";
+import { getMetadata } from "./services/productService.js";
 
 const { categories } = getMetadata();
 
