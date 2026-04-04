@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { getProductById } from "./services/productService";
-import { accessoryTypes, goldTypes, jewelryTypes } from "./data";
+import { getProductById as getProductByIdApi } from "./services/api.js";
+import { adaptProduct, getMetadata } from "./services/productService.js";
 import "./ProductDetail.css";
+
+const { accessoryTypes, goldTypes, jewelryTypes } = getMetadata();
 
 function ProductDetail() {
   const { id } = useParams();
@@ -14,16 +16,31 @@ function ProductDetail() {
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
-      const result = await getProductById(id);
-      
-      if (result.success) {
-        setProduct(result.data);
-      } else {
-        setError(result.error);
+      setError(null);
+
+      try {
+        const rawProduct = await getProductByIdApi(id);
+        const normalizedProduct = adaptProduct(rawProduct);
+
+        if (!normalizedProduct) {
+          setError("Product not found");
+          setProduct(null);
+        } else {
+          setProduct(normalizedProduct);
+        }
+      } catch (err) {
+        setError(err?.message || "Failed to load product");
+        setProduct(null);
       }
-      
+
       setLoading(false);
     };
+
+    if (!id) {
+      setError("Product id is missing");
+      setLoading(false);
+      return;
+    }
 
     fetchProduct();
   }, [id]);
@@ -49,7 +66,21 @@ function ProductDetail() {
     );
   }
 
-  const { name, price, image, description, category, maker, accessoriesType, goldType, jewelryType } = product;
+  const {
+    name,
+    price,
+    image,
+    description,
+    category,
+    categoryLabel,
+    maker,
+    accessoriesType,
+    accessoriesTypeLabel,
+    goldType,
+    goldTypeLabel,
+    jewelryType,
+    jewelryTypeLabel,
+  } = product;
 
   return (
     <div className="page">
@@ -64,16 +95,19 @@ function ProductDetail() {
           </div>
 
           <div className="detail-content">
-            <p className="pill detail-pill">{category}</p>
+            <p className="pill detail-pill">{categoryLabel || category}</p>
             <h1 className="detail-title">{name}</h1>
             <p className="detail-price">MMK {price.toLocaleString()}</p>
             
             <div className="detail-divider"></div>
             
             <div className="detail-section">
-              <h3 className="detail-section-title">Type</h3>
+              <h3 className="detail-section-title">Accessories Type</h3>
               <p className="detail-type">
-                {accessoryTypes[accessoriesType]?.labelEn} / {accessoryTypes[accessoriesType]?.labelMm}
+                {accessoriesTypeLabel || accessoryTypes[accessoriesType]?.labelEn || accessoriesType}
+                {accessoryTypes[accessoriesType]?.labelMm
+                  ? ` / ${accessoryTypes[accessoriesType]?.labelMm}`
+                  : ''}
               </p>
             </div>
 
@@ -81,7 +115,8 @@ function ProductDetail() {
               <div className="detail-section">
                 <h3 className="detail-section-title">Gold Purity</h3>
                 <p className="detail-type">
-                  {goldTypes[goldType]?.labelEn} / {goldTypes[goldType]?.labelMm}
+                  {goldTypeLabel || goldTypes[goldType]?.labelEn || goldType}
+                  {goldTypes[goldType]?.labelMm ? ` / ${goldTypes[goldType]?.labelMm}` : ''}
                 </p>
               </div>
             )}
@@ -90,7 +125,10 @@ function ProductDetail() {
               <div className="detail-section">
                 <h3 className="detail-section-title">Jewelry Style</h3>
                 <p className="detail-type">
-                  {jewelryTypes[jewelryType]?.labelEn} / {jewelryTypes[jewelryType]?.labelMm}
+                  {jewelryTypeLabel || jewelryTypes[jewelryType]?.labelEn || jewelryType}
+                  {jewelryTypes[jewelryType]?.labelMm
+                    ? ` / ${jewelryTypes[jewelryType]?.labelMm}`
+                    : ''}
                 </p>
               </div>
             )}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getAllProducts } from '../services/productService';
+import { adaptProducts } from '../services/productService.js';
+import { getProducts } from '../services/api.js';
 
 /**
  * Custom hook for managing product state
@@ -10,29 +11,28 @@ export const useProducts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
-      setError(null);
-      
-      const result = await getAllProducts();
-      
-      if (result.success) {
-        setProducts(result.data);
-      } else {
-        setError(result.error);
-      }
-      
-      setLoading(false);
-    };
+  const loadProducts = async () => {
+    setLoading(true);
+    setError(null);
 
-    fetchProducts();
+    try {
+      const data = await getProducts();
+      setProducts(adaptProducts(data));
+    } catch (err) {
+      setError(err?.message || 'Failed to load products');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadProducts();
   }, []);
 
   const toggleShowMore = (id) => {
     setProducts((prev) =>
       prev.map((product) =>
-        product.id === id
+        String(product.id) === String(id)
           ? { ...product, showMore: !product.showMore }
           : product
       )
@@ -40,12 +40,7 @@ export const useProducts = () => {
   };
 
   const refreshProducts = async () => {
-    setLoading(true);
-    const result = await getAllProducts();
-    if (result.success) {
-      setProducts(result.data);
-    }
-    setLoading(false);
+    await loadProducts();
   };
 
   return {

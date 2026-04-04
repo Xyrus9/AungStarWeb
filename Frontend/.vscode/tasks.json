@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run backend server",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"server"
+			],
+			"isBackground": true,
+			"group": "build"
+		}
+	]
+}
