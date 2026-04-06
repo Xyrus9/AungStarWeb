@@ -4,6 +4,9 @@ import Home from "./Home.js";
 import About from "./About.js";
 import ContactUs from "./ContactUs.js";
 import ProductDetail from "./ProductDetail.js";
+import ListProducts from "./admin/ListProducts.js";
+import EditProducts from "./admin/EditProducts.js";
+import CreateProducts from "./admin/CreateProducts.js";
 import "./App.css";
 
 function App() {
@@ -53,6 +56,9 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/admin" element={<ListProducts />} />  
+        <Route path='/admin/product/:id/edit' element={<EditProducts />} />
+        <Route path='/admin/product/create' element={<CreateProducts />} />
       </Routes>
 
       <footer className="footer">

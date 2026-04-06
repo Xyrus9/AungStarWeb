@@ -9,6 +9,8 @@ const port = process.env.PORT || 5010;
 connectDB();
 const app = express();
 
+app.use(express.json()); // Parse JSON request bodies
+
 app.get('/', (req, res) => {
     res.send('API Running!');
 });

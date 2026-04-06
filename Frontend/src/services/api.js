@@ -47,6 +47,34 @@ export function getProductById(id) {
   return request(`/products/${id}`);
 }
 
+export function updateProduct(id, data) {
+  if (!id && id !== 0) {
+    return Promise.reject(new Error('Product id is required'));
+  }
+
+  return request(`/products/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+export function createProduct(data) {
+  return request('/products', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export function deleteProduct(id) {
+  if (!id && id !== 0) {
+    return Promise.reject(new Error('Product id is required'));
+  }
+
+  return request(`/products/${id}`, {
+    method: 'DELETE',
+  });
+}
+
 export function getGoldPrices() {
   return request('/gold-prices');
 }
@@ -55,6 +83,9 @@ const apiService = {
   getProducts,
   getProductById,
   getGoldPrices,
+  updateProduct ,
+  createProduct,
+  deleteProduct,
 };
 
 export default apiService;

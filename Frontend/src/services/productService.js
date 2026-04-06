@@ -1,6 +1,7 @@
 import {
   getProducts as fetchProducts,
   getProductById as fetchProductById,
+  updateProduct as sendUpdateProduct,
 } from './api.js';
 
 export const accessoryTypes = {
@@ -277,7 +278,11 @@ export const createProduct = async (productData) => {
 };
 
 export const updateProduct = async (id, updates) => {
-  throw new Error('Updating products from the frontend is not implemented yet');
+  if (!id && id !== 0) {
+    throw new Error('Product id is required');
+  }
+
+  return sendUpdateProduct(id, updates);
 };
 
 export const deleteProduct = async (id) => {
