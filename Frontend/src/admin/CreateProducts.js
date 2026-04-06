@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { createProduct } from '../services/api.js';
+import './AdminDashboard.css';
 
 const CreateProducts = () => {
   const navigate = useNavigate();
@@ -48,14 +49,20 @@ const CreateProducts = () => {
 
 
   return (
-    <>
-      <Link to='/admin' className='btn btn-light my-3'>
-        Go Back
-      </Link>
+    <div className='admin-page'>
+      <div className='admin-shell'>
+        <header className='admin-header'>
+          <h1 className='admin-heading'>Create Product</h1>
+          <p className='admin-subtitle'>Add a new product to the admin catalog with complete details.</p>
+        </header>
+
+        <Link to='/admin' className='admin-btn admin-btn-primary admin-back-btn'>
+          Back
+        </Link>
      
-        <h1>Create Product</h1>
-          <Form onSubmit={submitHandler}>
-            <Form.Group controlId='name'>
+        <Form onSubmit={submitHandler} className='admin-form'>
+          <div className='admin-form-grid'>
+            <Form.Group controlId='name' className='admin-form-field'>
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type='text'
@@ -65,7 +72,7 @@ const CreateProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='category'>
+            <Form.Group controlId='category' className='admin-form-field'>
               <Form.Label>Category</Form.Label>
               <Form.Control
                 type='text'
@@ -75,7 +82,7 @@ const CreateProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='price'>
+            <Form.Group controlId='price' className='admin-form-field'>
               <Form.Label>Price</Form.Label>
               <Form.Control 
                 type='number'
@@ -85,7 +92,7 @@ const CreateProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='image'>
+            <Form.Group controlId='image' className='admin-form-field'>
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type='file'
@@ -99,7 +106,7 @@ const CreateProducts = () => {
               )}
             </Form.Group>
 
-            <Form.Group controlId='maker'>
+            <Form.Group controlId='maker' className='admin-form-field'>
               <Form.Label>Maker</Form.Label>
               <Form.Control
                 type='text'
@@ -109,7 +116,7 @@ const CreateProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='accessoryType'>
+            <Form.Group controlId='accessoryType' className='admin-form-field'>
               <Form.Label>Accessory Type</Form.Label>
               <Form.Control
                 type='text'
@@ -119,7 +126,7 @@ const CreateProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='goldType'>
+            <Form.Group controlId='goldType' className='admin-form-field'>
               <Form.Label>Gold Type</Form.Label>
               <Form.Control
                 type='text'
@@ -130,7 +137,7 @@ const CreateProducts = () => {
             </Form.Group>
 
 
-            <Form.Group controlId='description'>
+            <Form.Group controlId='description' className='admin-form-field admin-col-span-2'>
               <Form.Label>Description</Form.Label>
               <Form.Control
                 type='text'
@@ -140,17 +147,19 @@ const CreateProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Button
-              type='submit'
-              variant='primary'
-              style={{ marginTop: '1rem' }}
-              disabled={uploading}
-            >
-              {uploading ? 'Creating...' : 'Create Product'}
-            </Button>
-          </Form>
-   
-    </>
+            <div className='admin-form-footer admin-col-span-2'>
+              <Button
+                type='submit'
+                variant='primary'
+                disabled={uploading}
+              >
+                {uploading ? 'Creating...' : 'Create Product'}
+              </Button>
+            </div>
+          </div>
+        </Form>
+      </div>
+    </div>
   );
 };
 

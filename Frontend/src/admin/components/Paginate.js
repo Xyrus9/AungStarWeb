@@ -1,10 +1,11 @@
 import { Pagination } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import '../AdminDashboard.css';
 
 const Paginate = ({ pages, page, isAdmin = false, keyword = '' }) => {
   return (
     pages > 1 && (
-      <Pagination>
+      <Pagination className='admin-pagination'>
         {[...Array(pages).keys()].map((x) => (
           <Pagination.Item
             as={Link}

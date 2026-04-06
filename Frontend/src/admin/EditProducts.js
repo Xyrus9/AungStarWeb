@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { updateProduct } from '../services/api.js';
 import { getProductById } from '../services/api.js';
+import './AdminDashboard.css';
 
 const EditProducts = () => {
   const { id: productId } = useParams();
@@ -73,14 +74,20 @@ const EditProducts = () => {
 
 
   return (
-    <>
-      <Link to='/admin' className='btn btn-light my-3'>
-        Go Back
-      </Link>
+    <div className='admin-page'>
+      <div className='admin-shell'>
+        <header className='admin-header'>
+          <h1 className='admin-heading'>Edit Product</h1>
+          <p className='admin-subtitle'>Update product details in the admin catalog.</p>
+        </header>
+
+        <Link to='/admin' className='admin-btn admin-btn-primary admin-back-btn'>
+          Back
+        </Link>
      
-        <h1>Edit Product</h1>
-          <Form onSubmit={submitHandler}>
-            <Form.Group controlId='name'>
+        <Form onSubmit={submitHandler} className='admin-form'>
+          <div className='admin-form-grid'>
+            <Form.Group controlId='name' className='admin-form-field'>
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type='text'
@@ -90,7 +97,7 @@ const EditProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='category'>
+            <Form.Group controlId='category' className='admin-form-field'>
               <Form.Label>Category</Form.Label>
               <Form.Control
                 type='text'
@@ -100,7 +107,7 @@ const EditProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='price'>
+            <Form.Group controlId='price' className='admin-form-field'>
               <Form.Label>Price</Form.Label>
               <Form.Control 
                 type='number'
@@ -110,7 +117,7 @@ const EditProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='image'>
+            <Form.Group controlId='image' className='admin-form-field'>
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type='file'
@@ -129,7 +136,7 @@ const EditProducts = () => {
               )}
             </Form.Group>
 
-            <Form.Group controlId='maker'>
+            <Form.Group controlId='maker' className='admin-form-field'>
               <Form.Label>Maker</Form.Label>
               <Form.Control
                 type='text'
@@ -139,7 +146,7 @@ const EditProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='accessoryType'>
+            <Form.Group controlId='accessoryType' className='admin-form-field'>
               <Form.Label>Accessory Type</Form.Label>
               <Form.Control
                 type='text'
@@ -149,7 +156,7 @@ const EditProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='goldType'>
+            <Form.Group controlId='goldType' className='admin-form-field'>
               <Form.Label>Gold Type</Form.Label>
               <Form.Control
                 type='text'
@@ -160,7 +167,7 @@ const EditProducts = () => {
             </Form.Group>
 
 
-            <Form.Group controlId='description'>
+            <Form.Group controlId='description' className='admin-form-field admin-col-span-2'>
               <Form.Label>Description</Form.Label>
               <Form.Control
                 type='text'
@@ -170,17 +177,19 @@ const EditProducts = () => {
               ></Form.Control>
             </Form.Group>
 
-            <Button
-              type='submit'
-              variant='primary'
-              style={{ marginTop: '1rem' }}
-              disabled={uploading}
-            >
-              {uploading ? 'Updating...' : 'Update Product'}
-            </Button>
-          </Form>
-   
-    </>
+            <div className='admin-form-footer admin-col-span-2'>
+              <Button
+                type='submit'
+                variant='primary'
+                disabled={uploading}
+              >
+                {uploading ? 'Updating...' : 'Update Product'}
+              </Button>
+            </div>
+          </div>
+        </Form>
+      </div>
+    </div>
   );
 };
 
