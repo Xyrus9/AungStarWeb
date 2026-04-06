@@ -1,17 +1,11 @@
 import { Spinner } from 'react-bootstrap';
+import '../AdminDashboard.css';
 
 const Loader = () => {
   return (
-    <Spinner
-      animation='border'
-      role='status'
-      style={{
-        width: '100px',
-        height: '100px',
-        margin: 'auto',
-        display: 'block',
-      }}
-    ></Spinner>
+    <div className='admin-loader-wrap'>
+      <Spinner animation='border' role='status' className='admin-loader'></Spinner>
+    </div>
   );
 };
 
