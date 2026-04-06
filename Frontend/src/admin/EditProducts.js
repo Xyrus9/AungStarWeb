@@ -16,8 +16,10 @@ const EditProducts = () => {
   const [maker, setMaker] = useState('');
   const [accessoriesType, setAccessoriesType] = useState('');
   const [goldType, setGoldType] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
+  const [currentImage, setCurrentImage] = useState('');
   const [description, setDescription] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   // Fetch product data on component mount
   useEffect(() => {
@@ -28,7 +30,7 @@ const EditProducts = () => {
         setName(data.name || '');
         setCategory(data.category || '');
         setPrice(data.price || 0);
-        setImage(data.image || '');
+        setCurrentImage(data.image || '');
         setMaker(data.maker || '');
         setAccessoriesType(data.accessoriesType || '');
         setGoldType(data.goldType || '');
@@ -43,20 +45,28 @@ const EditProducts = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      await updateProduct(productId, {
-        name,
-        category,
-        price,
-        maker,
-        accessoriesType,
-        goldType,
-        image,
-        description,
-      }); 
-      toast.success('Product updated');
+      setUploading(true);
+
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('category', category);
+      formData.append('price', price);
+      formData.append('maker', maker);
+      formData.append('accessoriesType', accessoriesType);
+      formData.append('goldType', goldType);
+      formData.append('description', description);
+
+      if (image) {
+        formData.append('image', image);
+      }
+
+      await updateProduct(productId, formData);
+      toast.success('Product updated successfully');
       navigate('/admin');
     } catch (err) {
-      toast.error(err?.data?.message || err.error);
+      toast.error(err?.data?.message || err.error || 'Failed to update product');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -103,11 +113,20 @@ const EditProducts = () => {
             <Form.Group controlId='image'>
               <Form.Label>Image</Form.Label>
               <Form.Control
-                type='text'
-                placeholder={product?.image || 'Enter image url'}
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
+                type='file'
+                accept='image/*'
+                onChange={(e) => setImage(e.target.files[0])}
               ></Form.Control>
+              {currentImage && !image && (
+                <Form.Text className="text-muted">
+                  Current image: {currentImage}
+                </Form.Text>
+              )}
+              {image && (
+                <Form.Text className="text-muted">
+                  New image selected: {image.name}
+                </Form.Text>
+              )}
             </Form.Group>
 
             <Form.Group controlId='maker'>
@@ -155,8 +174,9 @@ const EditProducts = () => {
               type='submit'
               variant='primary'
               style={{ marginTop: '1rem' }}
+              disabled={uploading}
             >
-              Update
+              {uploading ? 'Updating...' : 'Update Product'}
             </Button>
           </Form>
    

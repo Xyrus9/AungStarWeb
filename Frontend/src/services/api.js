@@ -52,16 +52,22 @@ export function updateProduct(id, data) {
     return Promise.reject(new Error('Product id is required'));
   }
 
+  const isFormData = data instanceof FormData;
+
   return request(`/products/${id}`, {
     method: 'PUT',
-    body: JSON.stringify(data),
+    body: isFormData ? data : JSON.stringify(data),
+    headers: isFormData ? {} : { 'Content-Type': 'application/json' },
   });
 }
 
 export function createProduct(data) {
+  const isFormData = data instanceof FormData;
+
   return request('/products', {
     method: 'POST',
-    body: JSON.stringify(data),
+    body: isFormData ? data : JSON.stringify(data),
+    headers: isFormData ? {} : { 'Content-Type': 'application/json' },
   });
 }
 

@@ -1,12 +1,28 @@
+import { useState } from 'react';
 import { Table, Button, Row, Col } from 'react-bootstrap';
-import { FaEdit, FaPlus, FaTimes ,FaTrash, FaSync } from 'react-icons/fa';
+import { FaEdit, FaPlus, FaTrash, FaSync } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
-import { getAllProducts } from '../services/productService.js';
+import { deleteProduct } from '../services/api.js';
 import { useProducts } from '../hooks/useProducts.js';
-
 
 const ListProducts = () => {
     const { products, refreshProducts } = useProducts();
+    const [deletingProductId, setDeletingProductId] = useState(null);
+
+    const handleDelete = async (productId) => {
+        const confirmed = window.confirm('Are you sure you want to delete this product?');
+        if (!confirmed) return;
+
+        try {
+            setDeletingProductId(productId);
+            await deleteProduct(productId);
+            await refreshProducts();
+        } catch (error) {
+            window.alert(error?.message || 'Failed to delete product');
+        } finally {
+            setDeletingProductId(null);
+        }
+    };
 
     return (
         <>
@@ -33,11 +49,12 @@ const ListProducts = () => {
                    
                             <th>Name</th>
                             <th>Category</th>
-                            <th>Price  </th>
+                            <th>Price</th>
                             <th>Maker</th>
                             <th>Accessory Type</th>
                             <th>Gold Type</th>
-                            <th></th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,8 +78,13 @@ const ListProducts = () => {
                                         </LinkContainer>
                                     </td>
                                     <td>
-                                        <Button variant = "danger" className = "btn-sm">
-                                            <FaTrash />
+                                        <Button
+                                            variant = "danger"
+                                            className = "btn-sm"
+                                            onClick={() => handleDelete(productId)}
+                                            disabled={deletingProductId === productId}
+                                        >
+                                            <FaTrash /> Delete
                                         </Button>
                                     </td>
                                 </tr>

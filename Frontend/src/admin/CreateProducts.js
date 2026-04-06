@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { createProduct } from '../services/api.js';
@@ -13,25 +13,35 @@ const CreateProducts = () => {
   const [maker, setMaker] = useState('');
   const [accessoriesType, setAccessoriesType] = useState('');
   const [goldType, setGoldType] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');
+  const [uploading, setUploading] = useState(false);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      await createProduct( {
-        name,
-        category,
-        price,
-        maker,
-        accessoriesType,
-        goldType,
-        image,
-        description,
-      }); 
-      toast.success('Product updated');
+      setUploading(true);
+
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('category', category);
+      formData.append('price', price);
+      formData.append('maker', maker);
+      formData.append('accessoriesType', accessoriesType);
+      formData.append('goldType', goldType);
+      formData.append('description', description);
+
+      if (image) {
+        formData.append('image', image);
+      }
+
+      await createProduct(formData);
+      toast.success('Product created successfully');
       navigate('/admin');
     } catch (err) {
-      toast.error(err?.data?.message || err.error);
+      toast.error(err?.data?.message || err.error || 'Failed to create product');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -78,11 +88,15 @@ const CreateProducts = () => {
             <Form.Group controlId='image'>
               <Form.Label>Image</Form.Label>
               <Form.Control
-                type='text'
-                placeholder='Enter image url'
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
+                type='file'
+                accept='image/*'
+                onChange={(e) => setImage(e.target.files[0])}
               ></Form.Control>
+              {image && (
+                <Form.Text className="text-muted">
+                  Selected: {image.name}
+                </Form.Text>
+              )}
             </Form.Group>
 
             <Form.Group controlId='maker'>
@@ -130,8 +144,9 @@ const CreateProducts = () => {
               type='submit'
               variant='primary'
               style={{ marginTop: '1rem' }}
+              disabled={uploading}
             >
-              Update
+              {uploading ? 'Creating...' : 'Create Product'}
             </Button>
           </Form>
    

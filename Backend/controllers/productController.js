@@ -25,7 +25,6 @@ const createProduct = asyncHandler(async (req, res) => {
     category,
     price,
     description,
-    image,
     maker,
     brand,
     accessoriesType,
@@ -35,12 +34,18 @@ const createProduct = asyncHandler(async (req, res) => {
     numReviews,
   } = req.body;
 
+  // Handle image upload
+  let imagePath = '';
+  if (req.file) {
+    imagePath = `/uploads/${req.file.filename}`;
+  }
+
   const product = new Product({
     name,
     category,
     price,
     description,
-    image,
+    image: imagePath,
     maker,
     brand,
     accessoriesType,
@@ -59,17 +64,23 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, category, price, description, image, maker, accessoriesType, goldType, jewelryType } =
+  const { name, category, price, description, maker, accessoriesType, goldType, jewelryType } =
     req.body;
 
   const product = await Product.findById(req.params.id);
 
   if (product) {
+    // Handle image upload - only update if a new image is uploaded
+    let imagePath = product.image;
+    if (req.file) {
+      imagePath = `/uploads/${req.file.filename}`;
+    }
+
     product.name = name;
     product.category = category;
     product.price = price;
     product.description = description;
-    product.image = image;
+    product.image = imagePath;
     product.maker = maker;
     product.accessoriesType = accessoriesType;
     product.goldType = goldType;
