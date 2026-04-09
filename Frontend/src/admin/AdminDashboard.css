@@ -80,6 +80,10 @@
   border-color: transparent;
 }
 
+.admin-btn-logout {
+  min-width: 96px;
+}
+
 .admin-btn-danger {
   background: #9d2a2a;
   color: #fff;
@@ -113,7 +117,9 @@
 
 .admin-table {
   margin: 0;
-  min-width: 760px;
+  width: 100%;
+  min-width: 100%;
+  table-layout: fixed;
 }
 
 .admin-table thead th {
@@ -129,6 +135,52 @@
 .admin-table tbody td {
   vertical-align: middle;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
+  word-break: break-word;
+}
+
+.admin-table th:nth-child(1),
+.admin-table td:nth-child(1) {
+  width: 16%;
+}
+
+.admin-table th:nth-child(2),
+.admin-table td:nth-child(2) {
+  width: 10%;
+}
+
+.admin-table th:nth-child(3),
+.admin-table td:nth-child(3) {
+  width: 9%;
+}
+
+.admin-table th:nth-child(4),
+.admin-table td:nth-child(4) {
+  width: 18%;
+}
+
+.admin-table th:nth-child(5),
+.admin-table td:nth-child(5) {
+  width: 15%;
+}
+
+.admin-table th:nth-child(6),
+.admin-table td:nth-child(6) {
+  width: 12%;
+}
+
+.admin-table th:nth-child(7),
+.admin-table td:nth-child(7) {
+  width: 10%;
+}
+
+.admin-table th:nth-child(8),
+.admin-table td:nth-child(8) {
+  width: 10%;
+}
+
+.admin-table td:nth-child(7),
+.admin-table td:nth-child(8) {
+  text-align: center;
 }
 
 .admin-table tbody tr:hover {
@@ -269,6 +321,121 @@
   color: #1a1305;
   border-color: #d6b25d;
   background: linear-gradient(135deg, #d6b25d, #f0d898);
+}
+
+.admin-login-shell {
+  width: min(520px, 100%);
+  padding: 28px;
+}
+
+.admin-login-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-login-form .form-group,
+.admin-login-form .mb-3,
+.admin-login-form .admin-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+.admin-login-form .form-label,
+.admin-login-form label {
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  font-weight: 700;
+  color: var(--text, #1e1a14);
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.admin-input-wrap {
+  position: relative;
+}
+
+.admin-input-wrap .form-control {
+  width: 100%;
+  height: 48px;
+  padding-left: 42px;
+}
+
+.admin-input-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: var(--muted, #5f5646);
+  font-size: 14px;
+  z-index: 1;
+}
+
+.admin-password-wrap .form-control {
+  padding-right: 46px;
+}
+
+.admin-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--muted, #5f5646);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.admin-password-toggle:hover,
+.admin-password-toggle:focus {
+  color: var(--text, #1e1a14);
+  background: rgba(214, 178, 93, 0.16);
+  outline: none;
+}
+
+.admin-login-error {
+  margin: 0;
+  color: #a12222;
+  background: #fff1f1;
+  border: 1px solid #f0caca;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.admin-login-btn {
+  width: 100%;
+  min-height: 44px;
+}
+
+.admin-btn-icon {
+  min-width: 92px;
+  min-height: 40px;
+  padding: 8px 12px;
+}
+
+.admin-btn-icon svg {
+  font-size: 13px;
+}
+
+@media (max-width: 640px) {
+  .admin-btn-icon {
+    width: 100%;
+  }
 }
 
 @keyframes adminFadeIn {

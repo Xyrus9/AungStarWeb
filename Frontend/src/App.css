@@ -60,6 +60,13 @@ body {
      color: var(--nav-text);
 }
 
+.nav-right {
+     display: flex;
+     align-items: center;
+     justify-content: flex-end;
+     gap: 12px;
+}
+
 .brand {
      font-family: "Playfair Display", "Georgia", serif;
      font-size: 22px;
@@ -81,6 +88,24 @@ body {
 
 .link:hover {
      color: var(--accent);
+}
+
+.nav-logout-btn {
+     border-radius: 10px;
+     border: 1px solid rgba(255, 255, 255, 0.35);
+     background: rgba(255, 255, 255, 0.08);
+     color: var(--nav-text);
+     text-decoration: none;
+     font-weight: 700;
+     letter-spacing: 0.2px;
+     padding: 8px 14px;
+     transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-logout-btn:hover {
+     color: var(--nav-text);
+     border-color: var(--accent);
+     background: rgba(216, 179, 93, 0.18);
 }
 
 .theme-toggle {
@@ -134,6 +159,26 @@ body {
 .toggle-chip.is-dark::after {
      transform: translateX(16px);
      background: var(--pill-text);
+}
+
+@media (max-width: 768px) {
+     .nav {
+          flex-wrap: wrap;
+          padding: 14px 16px;
+          gap: 10px;
+     }
+
+     .nav-right {
+          width: 100%;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 10px;
+     }
+
+     .nav-links {
+          width: 100%;
+          gap: 14px;
+     }
 }
 
 .hero {

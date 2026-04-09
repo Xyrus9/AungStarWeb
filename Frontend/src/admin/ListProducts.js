@@ -80,15 +80,15 @@ const ListProducts = () => {
                                             <td>{product.goldType}</td>
                                             <td>
                                                 <LinkContainer to={`/admin/product/${productId}/edit`}>
-                                                    <Button variant="light" className="btn-sm admin-btn-icon">
-                                                        <FaEdit />
+                                                    <Button variant="light" className="admin-btn admin-btn-soft admin-btn-icon">
+                                                        <FaEdit /> Edit
                                                     </Button>
                                                 </LinkContainer>
                                             </td>
                                             <td>
                                                 <Button
                                                     variant="danger"
-                                                    className="btn-sm admin-btn-icon"
+                                                    className="admin-btn admin-btn-danger admin-btn-icon"
                                                     onClick={() => handleDelete(productId)}
                                                     disabled={deletingProductId === productId}
                                                 >
@@ -102,6 +102,7 @@ const ListProducts = () => {
                         </Table>
                     </div>
                 </div>
+
             </div>
         </div>
     );
